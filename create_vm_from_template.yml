@@ -8,7 +8,7 @@
 
 
   vars:
-    vcenter_hostname: 192.168.120.6
+    vcenter_hostname: <ip esxi>
     esxi_hostname: 51.159.57.135
     vcenter_user: admin_ansible@vsphere.local
     esxi_datastore: datastore1
