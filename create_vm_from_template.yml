@@ -1,0 +1,33 @@
+---
+- name: Create vm from template
+  hosts: localhost
+  vars_prompt:
+
+  - name: password
+    prompt: Quel est le mdp de l'utilisateur admin_ansible@vsphere.local ?
+
+
+  vars:
+    vcenter_hostname: 192.168.120.6
+    esxi_hostname: 51.159.57.135
+    vcenter_user: admin_ansible@vsphere.local
+    esxi_datastore: datastore1
+    vm_name: Linux-serveur
+    template: template-centos7
+    vm_notes: Create by ansible playbook
+
+
+  tasks:
+  - name: Create VM
+    vmware_guest:
+      hostname: '{{ vcenter_hostname }}'
+      esxi_hostname: '{{ esxi_hostname }}'
+      username: '{{ vcenter_user }}'
+      password: '{{ password }}'
+      datacenter: TOPACHAT
+      template: '{{ template }}'
+      name: '{{ vm_name }}'
+      folder: /
+      annotation: '{{ vm_notes }}'
+      validate_certs: no
+      state: poweredon
